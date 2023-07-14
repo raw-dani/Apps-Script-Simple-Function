@@ -1,0 +1,30 @@
+function groupEmailsByDomain() {
+  var labelName = "gmteknologi"; // Nama label yang akan digunakan
+
+  // Dapatkan semua thread/email dalam kotak masuk
+  var threads = GmailApp.getInboxThreads();
+
+  // Loop melalui setiap thread
+  for (var i = 0; i < threads.length; i++) {
+    var thread = threads[i];
+    var messages = thread.getMessages();
+
+    // Loop melalui setiap email dalam thread
+    for (var j = 0; j < messages.length; j++) {
+      var message = messages[j];
+      var fromAddress = message.getFrom();
+
+      // Periksa apakah alamat email pengirim berasal dari domain "gmteknologi.com"
+      if (fromAddress.indexOf("@mail.gmteknologi.com") !== -1) {
+        // Tambahkan label "GMTeknologi" ke email
+        var label = GmailApp.getUserLabelByName(labelName);
+        label.addToThread(thread);
+      }
+      if (fromAddress.indexOf("@gmteknologi.com") !== -1) {
+        // Tambahkan label "GMTeknologi" ke email
+        var label = GmailApp.getUserLabelByName(labelName);
+        label.addToThread(thread);
+      }
+    }
+  }
+}
